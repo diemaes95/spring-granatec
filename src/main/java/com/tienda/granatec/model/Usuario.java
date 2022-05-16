@@ -1,6 +1,19 @@
 package com.tienda.granatec.model;
 
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "usuarios")
 public class Usuario {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String nombre;
 	private String username;
@@ -9,6 +22,14 @@ public class Usuario {
 	private String telefono;
 	private String tipo; // para hacer referencia si es o no admin
 	private String password;
+	
+	// es necesario mappear que este atributo sera de uno a varios y que su nombre
+	// es usuario de la clase producto
+	@OneToMany(mappedBy = "usuario")
+	private List<Producto> productos;
+
+	@OneToMany(mappedBy = "usuario")
+	private List<Orden> ordenes;
 
 	public Usuario() {
 		// TODO Auto-generated constructor stub
@@ -89,6 +110,14 @@ public class Usuario {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public List<Producto> getProductos() {
+		return productos;
+	}
+
+	public void setProductos(List<Producto> productos) {
+		this.productos = productos;
 	}
 
 	@Override
