@@ -1,5 +1,6 @@
 package com.tienda.granatec.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import com.tienda.granatec.model.Producto;
@@ -16,4 +17,6 @@ public interface ProductoService {
 	
 	//borrar
 	public void delete(Integer id);
+	
+	public List<Producto> findAll();
 }
