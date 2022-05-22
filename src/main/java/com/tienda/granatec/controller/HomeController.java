@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.tienda.granatec.model.DetalleOrden;
 import com.tienda.granatec.model.Orden;
 import com.tienda.granatec.model.Producto;
+import com.tienda.granatec.model.Usuario;
+import com.tienda.granatec.service.IUsuarioService;
 import com.tienda.granatec.service.ProductoService;
 
 /*Esta clase tendra la logica para mostrar los productos al usuario*/
@@ -29,7 +31,9 @@ public class HomeController {
 
 	@Autowired
 	private ProductoService productoService;// nos permitira obntener los productos
-
+	
+	@Autowired
+	private IUsuarioService usuarioService;
 	// almacenaje detalles de pedido/orden
 	List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
 
@@ -68,14 +72,13 @@ public class HomeController {
 		detalleOrden.setNombre(producto.getNombre());
 		detalleOrden.setTotal(producto.getPrecio() * cantidad);
 		detalleOrden.setProducto(producto);
-		
-		//validar que el producto no se añade dos veces en la misma lista
+
+		// validar que el producto no se añade dos veces en la misma lista
 		Integer idProducto = producto.getId();
 		boolean ingresado = detalles.stream().anyMatch(x -> x.getProducto().getId() == idProducto);
-		if(!ingresado) {
+		if (!ingresado) {
 			detalles.add(detalleOrden);
 		}
-		
 
 		// mediante programacion funcional sumamos todos los totales de los productos
 		sumaTotal = detalles.stream().mapToDouble(dt -> dt.getTotal()).sum();
@@ -111,19 +114,26 @@ public class HomeController {
 
 		return "usuario/carrito";
 	}
-	
-	//metodo para mapear hacia carrito
+
+	// metodo para mapear hacia carrito
 	@GetMapping("/getCart")
-	public String getCart(Model model ) {
-		
-		//para que se quede siempre activo el carrito de esta manera sobreviven los datos del crud de carrito
+	public String getCart(Model model) {
+
+		// para que se quede siempre activo el carrito de esta manera sobreviven los
+		// datos del crud de carrito
 		model.addAttribute("cart", detalles);
 		model.addAttribute("orden", orden);
 		return "/usuario/carrito";
 	}
+
 	@GetMapping("/order")
-	public String order() {
+	public String order(Model model) {
 		
+		Usuario usuario = usuarioService.findById(1).get();
+		
+		model.addAttribute("cart", detalles);
+		model.addAttribute("orden", orden);
+		model.addAttribute("usuario", usuario);
 		return "usuario/resumenorden";
 	}
 }
