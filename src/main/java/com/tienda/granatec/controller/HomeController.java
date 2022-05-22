@@ -115,9 +115,15 @@ public class HomeController {
 	//metodo para mapear hacia carrito
 	@GetMapping("/getCart")
 	public String getCart(Model model ) {
+		
+		//para que se quede siempre activo el carrito de esta manera sobreviven los datos del crud de carrito
 		model.addAttribute("cart", detalles);
 		model.addAttribute("orden", orden);
 		return "/usuario/carrito";
 	}
-
+	@GetMapping("/order")
+	public String order() {
+		
+		return "usuario/resumenorden";
+	}
 }
