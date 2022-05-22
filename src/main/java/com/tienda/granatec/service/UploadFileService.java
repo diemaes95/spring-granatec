@@ -27,7 +27,7 @@ public class UploadFileService {
 		
 	}
 	//el siguiente metodo elimina una imagen cuando eliminemos un producto
-	public void delete(String nombre) {
+	public void deleteImage(String nombre) {
 		String ruta = "images//";
 		File file = new File(ruta+nombre);
 		file.delete();

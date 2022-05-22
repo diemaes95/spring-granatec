@@ -5,4 +5,7 @@
  */
 body {
   padding-top: 56px;
+ 
+  background: linear-gradient(to right,#eebe77e1, #76bbedec ), url(../img/fondo.jpg);
 }
+
