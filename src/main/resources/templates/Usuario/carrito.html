@@ -13,10 +13,10 @@
 
 
 	<!-- Bootstrap core CSS -->
-	<link th:href="@{vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 
 	<!-- Custom styles for this template -->
-	<link th:href="@{css/heroic-features.css}" rel="stylesheet">
+	<link th:href="@{/css/heroic-features.css}" rel="stylesheet">
 
 </head>
 
@@ -45,21 +45,21 @@
 					<div class="col-lg-9">
 						<table class="table">
 							<thead>
-								<tr th:each="dorden: ${cart}">
-									<th scope="col" th:text="${dorden.nombre}"></th>
-									<th scope="col" th:text="${dorden.precio}"></th>
-									<th scope="col" th:text="${dorden.cantidad}"></th>
-									<th scope="col" th:text="${dorden.total}"></th>
+								<tr >
+									<th scope="col" >Nombre</th>
+									<th scope="col" >Precio</th>
+									<th scope="col" >Cantidad</th>
+									<th scope="col" >Total</th>
 									<th scope="col">Acción</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>Nombre</td>
-									<td>Precio</td>
-									<td>Cantidad</td>
-									<td>Total</td>
-									<td><a href="#" class="btn btn-danger">Quitar</a></td>
+								<tr th:each="dorden: ${cart}">
+									<td th:text="${dorden.nombre}"></td>
+									<td th:text="${dorden.precio}"></td>
+									<td th:text="${dorden.cantidad}"></td>
+									<td th:text="${dorden.total}"></td>
+									<td><a th:href="@{/delete/cart/{id} (id=${dorden.producto.id})}" class="btn btn-danger">Quitar</a></td>
 								</tr>
 							</tbody>
 						</table>
@@ -70,7 +70,7 @@
 
 						<ul class="list-group">
 							<li class="list-group-item">
-								<h5 th:text="${orden.total}"></h5>
+								<h5 th:text="${orden.total}+'€'"></h5>
 							</li>
 							<a href="resumenorden.html" class="btn btn-dark">Ver Orden</a>
 						</ul>
@@ -86,8 +86,8 @@
 	<div th:include="Usuario/template_usuario.html::footer"></div>
 
 	<!-- Bootstrap core JavaScript -->
-	<script th:src="@{vendor/jquery/jquery.min.js}"></script>
-	<script th:src="@{vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
 </body>
 

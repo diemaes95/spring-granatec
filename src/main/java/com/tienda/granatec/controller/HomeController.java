@@ -1,5 +1,6 @@
 package com.tienda.granatec.controller;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -55,6 +56,7 @@ public class HomeController {
 	@PostMapping("/cart")
 	public String addCart(@RequestParam Integer id, @RequestParam Integer cantidad, Model model) {
 		DetalleOrden detalleOrden= new DetalleOrden();
+		DecimalFormat df = new DecimalFormat("#.00");
 		Producto producto = new Producto();
 		double sumaTotal = 0; //inicializamos a cero para que no se quede con el ultimo valor despues de una ejecucion 
 		Optional<Producto> optionalProducto = productoService.get(id);
@@ -72,11 +74,37 @@ public class HomeController {
 		
 		//mediante programacion funcional sumamos todos los totales de los productos
 		sumaTotal = detalles.stream().mapToDouble(dt->dt.getTotal()).sum();
-		orden.setTotal(sumaTotal);
+		
+		orden.setTotal( sumaTotal );
 		model.addAttribute("cart", detalles);
 		model.addAttribute("orden", orden);
 		return "usuario/carrito";
 	}
 	
+	//quitar un producto del carrito 
+	@GetMapping("/delete/cart/{id}")
+	public String deleteProductoCart(@PathVariable Integer id, Model model) {
+		//lista nueva de productos
+		List<DetalleOrden> ordenesNueva = new ArrayList<DetalleOrden>();
+		
+		//los añadira todos menos el id que se le pasa 
+		for(DetalleOrden detalleOrden: detalles) {
+			if(detalleOrden.getProducto().getId() != id) {
+				ordenesNueva.add(detalleOrden);
+			}
+		}
+		
+		//actualizar la lista con los productos restantes al seleccionado 
+		detalles = ordenesNueva;
+		
+		double sumaTotal = 0;
+		sumaTotal = detalles.stream().mapToDouble(dt->dt.getTotal()).sum();
+		
+		orden.setTotal(sumaTotal);
+		model.addAttribute("cart", detalles);
+		model.addAttribute("orden", orden);
+		
+		return "usuario/carrito";
+	}
 
 }
