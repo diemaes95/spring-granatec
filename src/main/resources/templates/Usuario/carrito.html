@@ -45,11 +45,11 @@
 					<div class="col-lg-9">
 						<table class="table">
 							<thead>
-								<tr>
-									<th scope="col">Producto</th>
-									<th scope="col">Precio</th>
-									<th scope="col">Cantidad</th>
-									<th scope="col">Total</th>
+								<tr th:each="dorden: ${cart}">
+									<th scope="col" th:text="${dorden.nombre}"></th>
+									<th scope="col" th:text="${dorden.precio}"></th>
+									<th scope="col" th:text="${dorden.cantidad}"></th>
+									<th scope="col" th:text="${dorden.total}"></th>
 									<th scope="col">Acción</th>
 								</tr>
 							</thead>
@@ -70,7 +70,7 @@
 
 						<ul class="list-group">
 							<li class="list-group-item">
-								<h5>Total: $ 10</h5>
+								<h5 th:text="${orden.total}"></h5>
 							</li>
 							<a href="resumenorden.html" class="btn btn-dark">Ver Orden</a>
 						</ul>
