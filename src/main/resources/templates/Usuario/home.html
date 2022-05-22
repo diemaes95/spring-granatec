@@ -21,37 +21,14 @@
 </head>
 
 <body>
+	<div th:include="Usuario/template_usuario.html::header"></div>
 
-	<!-- Navigation -->
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<div class="container">
-			<a class="navbar-brand" href="#">Spring eCommerce</a>
-
-			<form class="form-inline my-2 my-lg-0" method="post" action="#">
-				<input class="form-control mr-sm-2" type="search" placeholder="Buscar" aria-label="Search" name="nombre"
-					autocomplete="off">
-				<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-			</form>
-
-
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-				aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="navbarResponsive">
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="carrito.html">Carrito</a></li>
-					<li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
 
 	<!-- Page Content -->
 	<div class="container">
 
 		<!-- Jumbotron Header -->
-		<header class="jumbotron my-1">
+		<header class="jumbotron my-1 bg-info  text-white">
 			<h1 class="display-3">Bienvenido a Spring Ecommerce 2021</h1>
 			<p class="lead">Tu tienda de productos en Línea</p>
 		</header>
@@ -61,11 +38,11 @@
 
 			<div class="col-lg-3 col-md-6 mb-3 mt-2 " th:each="producto: ${productos}">
 				<div class="card h-100">
-					<img class="card-img-top" th:src = "@{/images/{img} (img = ${producto.imagen})}" >
+					<img class="card-img-top" th:src="@{/images/{img} (img = ${producto.imagen})}">
 					<div class="card-body">
 						<h5 class="card-text" th:text="${producto.nombre}"></h5>
-						<p class="descripcion" th:text="${producto.descripcion}" > </p>
-						<p class="precio" th:text="${producto.precio}+€" > </p>
+						<p class="descripcion" th:text="${producto.descripcion}"> </p>
+						<p class="precio" th:text="${producto.precio}+€"> </p>
 					</div>
 					<!-- Product actions-->
 					<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
@@ -81,12 +58,7 @@
 	<!-- /.container -->
 
 	<!-- Footer -->
-	<footer class="py-5 bg-dark">
-		<div class="container">
-			<p class="m-0 text-center text-white">Copyright &copy; Spring eCommerce 2021</p>
-		</div>
-		<!-- /.container -->
-	</footer>
+	<div th:include="Usuario/template_usuario.html::footer"></div>
 
 	<!-- Bootstrap core JavaScript -->
 	<script th:src="@{vendor/jquery/jquery.min.js}"></script>
