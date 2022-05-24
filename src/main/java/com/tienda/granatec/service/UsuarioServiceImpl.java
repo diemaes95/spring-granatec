@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.tienda.granatec.model.Usuario;
-import com.tienda.granatec.repository.UsuarioRepository;
+import com.tienda.granatec.repository.IUsuarioRepository;
 
 @Service
-public class IUsuarioServiceImpl implements IUsuarioService{
+public class UsuarioServiceImpl implements IUsuarioService{
 
 	@Autowired
-	private UsuarioRepository usuarioRepository;
+	private IUsuarioRepository usuarioRepository;
 
 	@Override
 	public Optional<Usuario> findById(Integer Id) {

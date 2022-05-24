@@ -30,7 +30,7 @@
 
       <!-- Page Heading/Breadcrumbs -->
       <h1 class="mt-4 mb-3">
-        Spring eCommerce <small>Resumen de la orden</small>
+        Granatec tienda <small>Resumen del pedido</small>
       </h1>
 
       <ol class="breadcrumb">
@@ -45,11 +45,11 @@
            <div class="col-lg-9">
              <div class="card-body">
               <h5 class="card-title">
-                DATOS ORDEN
+                DATOS DEL PEDIDO
               </h5>
-              <h6 th:text="'Nombre: ' + ${usuario.nombre}"> </h6>
-              <h6 th:text="'Correo: '+${usuario.email}"> </h6>
-              <h6 th:text="'Dirección: '+${usuario.direccion}"></h6>
+              <h6 >Nombre: <small style="font-size: 16px;" th:text="${usuario.nombre}"></small> </h6>
+              <h6 >Correo: <small style="font-size: 16px;" th:text="${usuario.email}"></small> </h6>
+              <h6>Dirección: <small style="font-size: 16px;" th:text="${usuario.direccion}"></small></h6>
 
               <h5 class="card-title">
                 PRODUCTOS

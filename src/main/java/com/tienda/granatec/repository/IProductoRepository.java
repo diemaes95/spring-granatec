@@ -12,6 +12,6 @@ import com.tienda.granatec.model.Producto;
  * 				 y el tipo de dato que se le aplicara al crud ejemplo por ID  */
 
 @Repository
-public interface ProductoRepository extends JpaRepository<Producto, Integer> {
+public interface IProductoRepository extends JpaRepository<Producto, Integer> {
 	
 }

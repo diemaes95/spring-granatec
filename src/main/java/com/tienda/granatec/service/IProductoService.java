@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.tienda.granatec.model.Producto;
 
-public interface ProductoService {
+public interface IProductoService {
 	//guardar
 	public Producto save(Producto producto);
 	//Optional nos da la capacidad de valiar si el objeto que mandamos a la base de datos existe o no

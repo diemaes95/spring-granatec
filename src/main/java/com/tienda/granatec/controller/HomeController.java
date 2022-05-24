@@ -20,7 +20,7 @@ import com.tienda.granatec.model.Orden;
 import com.tienda.granatec.model.Producto;
 import com.tienda.granatec.model.Usuario;
 import com.tienda.granatec.service.IUsuarioService;
-import com.tienda.granatec.service.ProductoService;
+import com.tienda.granatec.service.IProductoService;
 
 /*Esta clase tendra la logica para mostrar los productos al usuario*/
 @Controller
@@ -30,7 +30,7 @@ public class HomeController {
 	private final Logger LOGGER = LoggerFactory.getLogger(HomeController.class);
 
 	@Autowired
-	private ProductoService productoService;// nos permitira obntener los productos
+	private IProductoService productoService;// nos permitira obntener los productos
 	
 	@Autowired
 	private IUsuarioService usuarioService;
@@ -128,7 +128,7 @@ public class HomeController {
 
 	@GetMapping("/order")
 	public String order(Model model) {
-		
+		//para probar probamos con un dato quemado 
 		Usuario usuario = usuarioService.findById(1).get();
 		
 		model.addAttribute("cart", detalles);

@@ -9,3 +9,8 @@ body {
   background: linear-gradient(to right,#eebe77e1, #76bbedec ), url(../img/fondo.jpg);
 }
 
+
+footer{
+	margin-top: 8%;
+	background: linear-gradient(to right,#665233, #3f6682 ), url(../img/fondo.jpg);
+}
