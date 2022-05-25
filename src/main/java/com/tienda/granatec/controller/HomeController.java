@@ -1,6 +1,7 @@
 package com.tienda.granatec.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +20,10 @@ import com.tienda.granatec.model.DetalleOrden;
 import com.tienda.granatec.model.Orden;
 import com.tienda.granatec.model.Producto;
 import com.tienda.granatec.model.Usuario;
+import com.tienda.granatec.repository.IDetalleOrdenRepository;
 import com.tienda.granatec.service.IUsuarioService;
+import com.tienda.granatec.service.IDetalleOrdenService;
+import com.tienda.granatec.service.IOrdenService;
 import com.tienda.granatec.service.IProductoService;
 
 /*Esta clase tendra la logica para mostrar los productos al usuario*/
@@ -31,9 +35,16 @@ public class HomeController {
 
 	@Autowired
 	private IProductoService productoService;// nos permitira obntener los productos
-	
+
 	@Autowired
 	private IUsuarioService usuarioService;
+
+	@Autowired
+	private IOrdenService ordenService;
+
+	@Autowired
+	IDetalleOrdenService detalleOrdenService;
+
 	// almacenaje detalles de pedido/orden
 	List<DetalleOrden> detalles = new ArrayList<DetalleOrden>();
 
@@ -128,12 +139,41 @@ public class HomeController {
 
 	@GetMapping("/order")
 	public String order(Model model) {
-		//para probar probamos con un dato quemado 
+		// para probar probamos con un dato quemado
 		Usuario usuario = usuarioService.findById(1).get();
-		
+
 		model.addAttribute("cart", detalles);
 		model.addAttribute("orden", orden);
 		model.addAttribute("usuario", usuario);
 		return "usuario/resumenorden";
 	}
+	//Método para guardar el pedido
+	@GetMapping("/saveOrder")
+	public String saveOrder() {
+		Date fechaCreacion = new Date();
+		orden.setFechaCreacion(fechaCreacion);
+		orden.setNumero(ordenService.generarNumeroOrden());
+
+		// usuario
+		// para probar probamos con un dato quemado
+		Usuario usuario = usuarioService.findById(1).get();
+		orden.setUsuario(usuario);
+		//guardar datos del pedido / orden 
+		ordenService.save(orden);
+		
+		//guardar detalles del pedido
+		
+		for(DetalleOrden dt: detalles) {
+			dt.setOrden(orden);
+			detalleOrdenService.save(dt);
+		}
+		
+		//si el usuario quiere seguir comprando se le hara un limpiado a la lista de pedido
+		orden =new Orden();
+		detalles.clear();
+		
+		//nos redirigira al home
+		return "redirect:/";
+	}
+
 }
