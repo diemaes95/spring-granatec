@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -147,7 +149,8 @@ public class HomeController {
 		model.addAttribute("usuario", usuario);
 		return "usuario/resumenorden";
 	}
-	//Método para guardar el pedido
+
+	// Método para guardar el pedido
 	@GetMapping("/saveOrder")
 	public String saveOrder() {
 		Date fechaCreacion = new Date();
@@ -158,22 +161,33 @@ public class HomeController {
 		// para probar probamos con un dato quemado
 		Usuario usuario = usuarioService.findById(1).get();
 		orden.setUsuario(usuario);
-		//guardar datos del pedido / orden 
+		// guardar datos del pedido / orden
 		ordenService.save(orden);
-		
-		//guardar detalles del pedido
-		
-		for(DetalleOrden dt: detalles) {
+
+		// guardar detalles del pedido
+
+		for (DetalleOrden dt : detalles) {
 			dt.setOrden(orden);
 			detalleOrdenService.save(dt);
 		}
-		
-		//si el usuario quiere seguir comprando se le hara un limpiado a la lista de pedido
-		orden =new Orden();
+
+		// si el usuario quiere seguir comprando se le hara un limpiado a la lista de
+		// pedido
+		orden = new Orden();
 		detalles.clear();
-		
-		//nos redirigira al home
+
+		// nos redirigira al home
 		return "redirect:/";
+	}
+
+	@PostMapping("/buscar")
+	public String searchProducto(@RequestParam String nombre, Model model) {
+		LOGGER.info("Nombre del producto {}", nombre);
+		//Devuelve una lista con los productos que contengan los caracteres buscados
+		List<Producto> productos = productoService.findAll().stream()
+				.filter(x -> x.getNombre().toUpperCase().contains(nombre.toUpperCase())).collect(Collectors.toList());
+		model.addAttribute("productos", productos);
+		return "usuario/home";
 	}
 
 }
