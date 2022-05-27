@@ -8,10 +8,10 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>GRANATEC</title>
+  <title>Spring eCommerce</title>
 
 
-  <!-- Bootstrap core CSS -->
+    <!-- Bootstrap core CSS -->
 	<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 
 	<!-- Custom styles for this template -->
@@ -41,53 +41,47 @@
   </nav>
 
 
- <!-- Page Content -->
-  <div class="container mt-5 bg-white rounded pt-3">
+  <!-- Page Content -->
+  <div class="container mt-4 bg-white pt-3 rounded ">
 
-    <div class="card mb-3 ">
-      <div class="row no-gutters ">
-        <div class="col-md-4"></div>
+    <div class="card mb-3">
+      <div class="row no-gutters">
+        <div class="col-md-4">
+        </div>
         <div class="col-md-8">
           <div class="card-body">
-            <h2>Registro</h2>
+            <h2>Ingresar</h2>
 
           </div>
         </div>
       </div>
     </div>
-    <form th:action="@{/usuario/save}" method="post">
+
+    
+    <form  th:action="@{/usuario/acceder}" method="post">
       <div class="form-group">
-        <label for="nombres">Nombre:</label> <input type="text"
-          class="form-control" id="nombre" name="nombre" required
-          placeholder="Ingrese su nombre" autocomplete="off">
+        <label for="email"> Email:  </label>      
+        <input type="email" class="form-control" id="email" name="email" placeholder="Ingrese su email" required autocomplete="off"> 
+
       </div>
 
       <div class="form-group">
-        <label for="email">Email:</label> <input type="email"
-          class="form-control" id="email" name="email" required
-          placeholder="Ingrese su email" autocomplete="off">
+        <label for="pwd"> Contraseña:</label>
+        <input type="password"  class="form-control" id="password" name="password" placeholder="Ingrese su contraseña" required>       
       </div>
 
       <div class="form-group">
-        <label for="direccion">Dirección:</label> <input type="text"
-          class="form-control" id="direccion" name="direccion" required
-          placeholder="Ingrese su dirección" autocomplete="off">
-      </div>
-
-      <div class="form-group">
-        <label for="pwd">Contraseña</label> <input type="password"
-          class="form-control" id="password" name="password" required placeholder="Ingrese su contraseña" autocomplete="off">
-      </div>
-      <div class="col-sm-2 ">
-        <button type="submit" class="btn btn-success mb-3">Guardar</button>
-      </div>
+        <div class="col-sm-2">
+          <button type="submit" class="btn btn-dark"> <span class="glyphicon glyphicon-ok"></span> Ingresar</button>
+        </div>      
+      </div>    
     </form>
-
+    <div class="col-sm-5 pb-3"><a th:href="@{/usuario/registro}" class="card-link ">Si aún no tiene cuenta aqui puede registrarse</a> </div>
+    
   </div>
-
   <!-- /.container -->
 
-<!-- Footer -->
+ <!-- Footer -->
 		<footer class="py-5 bg-dark fixed-bottom " >
 			<div class="container">
 				<p class="m-0 text-center text-white">Copyright &copy; Spring Granatec 2022 <a rel="license"  href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" />

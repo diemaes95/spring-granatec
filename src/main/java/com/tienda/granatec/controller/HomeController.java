@@ -162,7 +162,10 @@ public class HomeController {
 		Usuario usuario = usuarioService.findById(1).get();
 		orden.setUsuario(usuario);
 		// guardar datos del pedido / orden
-		ordenService.save(orden);
+		
+			ordenService.save(orden);
+		
+		
 
 		// guardar detalles del pedido
 
