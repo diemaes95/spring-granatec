@@ -3,6 +3,8 @@ package com.tienda.granatec.controller;
 import java.io.IOException;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +19,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.tienda.granatec.model.Producto;
 import com.tienda.granatec.model.Usuario;
 import com.tienda.granatec.service.IProductoService;
+import com.tienda.granatec.service.IUsuarioService;
 import com.tienda.granatec.service.UploadFileService;
+import com.tienda.granatec.service.UsuarioServiceImpl;
 
 @Controller
 @RequestMapping("/productos")
@@ -30,6 +34,9 @@ public class ProductoController {
 
 	@Autowired
 	private UploadFileService upload;
+	
+	@Autowired
+	private IUsuarioService usuarioService;
 
 	@GetMapping("")
 	public String show(Model model) {
@@ -43,13 +50,14 @@ public class ProductoController {
 	}
 
 	@PostMapping("/save")
-	public String save(Producto producto, @RequestParam("img") MultipartFile file) throws IOException {// requestParam
+	public String save(Producto producto, @RequestParam("img") MultipartFile file ,HttpSession sesion) throws IOException {// requestParam
 																										// trae del
 																										// campo img del
 																										// formulario la
 		// imagen para la variable vile
 		LOGGER.info("Este es el objeto producto {}", producto);
-		Usuario usuario = new Usuario(1, "", "", "", "", "", "", "");
+		
+		Usuario usuario = usuarioService.findById(Integer.parseInt(sesion.getAttribute("idUsuario").toString())).get();
 		producto.setUsuario(usuario);
 
 		// imagen
