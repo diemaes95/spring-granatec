@@ -59,6 +59,8 @@ public class HomeController {
 	public String home(Model model, HttpSession sesion) {
 		model.addAttribute("productos", productoService.findAll());// aqui trae todos los productos con findAll()
 		LOGGER.info("sesion del usuario: {}", sesion.getAttribute("idUsuario"));
+		//sesion 
+		model.addAttribute("sesion", sesion.getAttribute("idUsuario"));
 		return "usuario/home";
 	}
 
@@ -133,12 +135,13 @@ public class HomeController {
 
 	// metodo para mapear hacia carrito
 	@GetMapping("/getCart")
-	public String getCart(Model model) {
+	public String getCart(Model model, HttpSession sesion) {
 
 		// para que se quede siempre activo el carrito de esta manera sobreviven los
 		// datos del crud de carrito
 		model.addAttribute("cart", detalles);
 		model.addAttribute("orden", orden);
+		model.addAttribute("sesion", sesion.getAttribute("idUsuario"));
 		return "/usuario/carrito";
 	}
 
