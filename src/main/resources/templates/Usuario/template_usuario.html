@@ -69,13 +69,14 @@
 			<div class="collapse navbar-collapse" id="navbarResponsive">
 				<ul class="navbar-nav ml-auto">
 					<li class="nav-item"><a class="nav-link" href="carrito.html">Carrito</a></li>
-					<li class="nav-item"><a class="nav-link" href="login.html">Login</a></li>
+					<li class="nav-item"><a class="nav-link" th:href="@{/usuario/login}">Login</a></li>
 					<li class="nav-item dropdown"><a
 							class="nav-link dropdown-toggle" href="#"
 							id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
 							aria-haspopup="true" aria-expanded="false"> USER </a>
 							<div class="dropdown-menu"
 								aria-labelledby="navbarDropdownMenuLink">
+								<a class="dropdown-item" th:href="@{/usuario/compras}">Compras</a> 
 								<a class="dropdown-item" th:href="@{/getCart}">Carrito</a> 
 							</div></li>
 				</ul>
