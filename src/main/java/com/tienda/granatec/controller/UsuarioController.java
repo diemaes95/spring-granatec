@@ -1,9 +1,9 @@
 package com.tienda.granatec.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpSessionIdListener;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.tienda.granatec.model.Orden;
 import com.tienda.granatec.model.Usuario;
+import com.tienda.granatec.service.IOrdenService;
 import com.tienda.granatec.service.IUsuarioService;
 
 @Controller
@@ -27,6 +29,9 @@ public class UsuarioController {
 
 	@Autowired
 	private IUsuarioService usuarioService;
+	
+	@Autowired
+	private IOrdenService ordenService;
 
 	// usuario/registro
 	@GetMapping("/registro")
@@ -70,6 +75,11 @@ public class UsuarioController {
 	@GetMapping("/compras")
 	public String obtenerCompras(Model model, HttpSession sesion) {
 		model.addAttribute("sesion", sesion.getAttribute("idUsuario"));
+		//como es un optional hay que poner .get() al final para que traiga el usuario , ya que optional valida si es usuario o no 
+		Usuario usuario = usuarioService.findById(Integer.parseInt(sesion.getAttribute("idUsuario").toString())).get();
+		List<Orden> ordenes = ordenService.findByUsuario(usuario);
+		
+		model.addAttribute("ordenes", ordenes);
 		return "usuario/compras";
 	}
 }

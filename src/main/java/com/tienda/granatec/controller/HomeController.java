@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpSession;
@@ -24,11 +23,10 @@ import com.tienda.granatec.model.DetalleOrden;
 import com.tienda.granatec.model.Orden;
 import com.tienda.granatec.model.Producto;
 import com.tienda.granatec.model.Usuario;
-import com.tienda.granatec.repository.IDetalleOrdenRepository;
-import com.tienda.granatec.service.IUsuarioService;
 import com.tienda.granatec.service.IDetalleOrdenService;
 import com.tienda.granatec.service.IOrdenService;
 import com.tienda.granatec.service.IProductoService;
+import com.tienda.granatec.service.IUsuarioService;
 
 /*Esta clase tendra la logica para mostrar los productos al usuario*/
 @Controller
