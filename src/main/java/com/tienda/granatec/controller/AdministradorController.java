@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.tienda.granatec.model.Producto;
+import com.tienda.granatec.service.IOrdenService;
 import com.tienda.granatec.service.IProductoService;
 import com.tienda.granatec.service.IUsuarioService;
 
@@ -20,6 +21,9 @@ public class AdministradorController {
 	
 	@Autowired
 	private IUsuarioService usuarioService;
+	
+	@Autowired
+	private IOrdenService ordenService;
 	
 	@GetMapping("")
 	public String home(Model model) {//cuando se haga la peticion al metodo devuelve los productos
@@ -33,5 +37,11 @@ public class AdministradorController {
 	public String usuarios(Model model) {
 		model.addAttribute("usuarios", usuarioService.findAll());
 		return "administrador/usuarios";
+	}
+	
+	@GetMapping("/pedidos")
+	public String pedidos(Model model) {
+		model.addAttribute("pedidos", ordenService.findAll());
+		return "administrador/pedidos";
 	}
 }
