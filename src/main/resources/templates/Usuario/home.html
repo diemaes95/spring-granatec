@@ -8,7 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<meta name="description" content="">
 	<meta name="author" content="">
-
+	<link rel="shortcut icon" th:href="@{/img/casa.png}" type="image/x-icon">
 	<title>GRANATEC</title>
 
 
@@ -22,10 +22,10 @@
 
 <body>
 	<div th:include="Usuario/template_usuario.html::header" th:if="${sesion==null}">
-	
+
 	</div>
 	<div th:include="Usuario/template_usuario.html::header-user" th:unless="${sesion==null}">
-	
+
 	</div>
 
 	<!-- Page Content -->
@@ -50,7 +50,8 @@
 					</div>
 					<!-- Product actions-->
 					<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-						<div class="text-center"><a class="btn btn-outline-dark mt-auto" th:href="@{/productoHome/{id} (id = ${producto.id})}">ver producto</a></div>
+						<div class="text-center"><a class="btn btn-outline-dark mt-auto"
+								th:href="@{/productoHome/{id} (id = ${producto.id})}">ver producto</a></div>
 					</div>
 				</div>
 			</div>

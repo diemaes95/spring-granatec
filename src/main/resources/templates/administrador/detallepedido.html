@@ -22,12 +22,7 @@
 <body>
 
 	<!-- Navigation -->
-	<div th:include="Usuario/template_usuario.html::header" th:if="${sesion==null}">
-
-	</div>
-	<div th:include="Usuario/template_usuario.html::header-user" th:unless="${sesion==null}">
-
-	</div>
+	<div th:include="administrador/template_admin.html::header"></div>
 
 	<!-- Page Content -->
 	<div class="container">
@@ -39,8 +34,8 @@
 		</h1>
 
 		<ol class="breadcrumb">
-			<li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
-			<li class="breadcrumb-item"><a th:href="@{/usuario/compras}">Compras</a></li>
+			<li class="breadcrumb-item"><a th:href="@{/administrador}">Home</a></li>
+			<li class="breadcrumb-item"><a th:href="@{/administrador/pedidos}">Pedidos</a></li>
 			<li class="breadcrumb-item active">Detalle de Compra</li>
 		</ol>
 
@@ -59,7 +54,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr th:each=" detalle: ${detalles}">
+								<tr th:each="detalle : ${detalles}">
 									<td th:text="${detalle.cantidad}"></td>
 									<td th:text="${detalle.nombre}"></td>
 									<td th:text="${detalle.precio}+' €'"></td>
@@ -74,13 +69,17 @@
 	</div>
 	<!-- /.container -->
 
-
 	<!-- Footer -->
-	<div th:include="Usuario/template_usuario.html::footer"></div>
+	<footer class="py-5 bg-dark">
+		<div class="container">
+			<p class="m-0 text-center text-white"></p>
+		</div>
+		<!-- /footer -->
+		<div th:include="administrador/template_admin.html::footer"></div>
 
-	<!-- Bootstrap core JavaScript -->
-	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
-	<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+		<!-- Bootstrap core JavaScript -->
+		<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
+		<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
 
 </body>
 

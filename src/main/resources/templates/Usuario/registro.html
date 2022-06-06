@@ -3,15 +3,15 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link rel="shortcut icon" th:href="@{/img/casa.png}" type="image/x-icon">
+	<title>GRANATEC</title>
 
-  <title>GRANATEC</title>
 
-
-  <!-- Bootstrap core CSS -->
+	<!-- Bootstrap core CSS -->
 	<link th:href="@{/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
 
 	<!-- Custom styles for this template -->
@@ -21,81 +21,87 @@
 
 <body>
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" th:href="@{/}">Granatec</a>
+	<!-- Navigation -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<div class="container">
+			<a class="navbar-brand" th:href="@{/}">Granatec</a>
 
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/usuario/login}">Login</a>
-          </li>
-        </ul>
-      </div>    
-    </div>
-  </nav>
-
-
- <!-- Page Content -->
-  <div class="container mt-5 bg-white rounded pt-3">
-
-    <div class="card mb-3 ">
-      <div class="row no-gutters ">
-        <div class="col-md-4"></div>
-        <div class="col-md-8">
-          <div class="card-body">
-            <h2>Registro</h2>
-
-          </div>
-        </div>
-      </div>
-    </div>
-    <form th:action="@{/usuario/save}" method="post">
-      <div class="form-group">
-        <label for="nombres">Nombre:</label> <input type="text"
-          class="form-control" id="nombre" name="nombre" required
-          placeholder="Ingrese su nombre" autocomplete="off">
-      </div>
-
-      <div class="form-group">
-        <label for="email">Email:</label> <input type="email"
-          class="form-control" id="email" name="email" required
-          placeholder="Ingrese su email" autocomplete="off">
-      </div>
-
-      <div class="form-group">
-        <label for="direccion">Dirección:</label> <input type="text"
-          class="form-control" id="direccion" name="direccion" required
-          placeholder="Ingrese su dirección" autocomplete="off">
-      </div>
-
-      <div class="form-group">
-        <label for="pwd">Contraseña</label> <input type="password"
-          class="form-control" id="password" name="password" required placeholder="Ingrese su contraseña" autocomplete="off">
-      </div>
-      <div class="col-sm-2 ">
-        <button type="submit" class="btn btn-success mb-3">Guardar</button>
-      </div>
-    </form>
-
-  </div>
-
-  <!-- /.container -->
-
-<!-- Footer -->
-		<footer class="py-5 bg-dark fixed-bottom " >
-			<div class="container">
-				<p class="m-0 text-center text-white">Copyright &copy; Spring Granatec 2022 <a rel="license"  href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
-				</a><br />Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0 Internacional</a>.</p>
-				
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+				aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarResponsive">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" th:href="@{/usuario/login}">Login</a>
+					</li>
+				</ul>
 			</div>
-			<!-- /.container -->
-		</footer>
+		</div>
+	</nav>
+
+
+	<!-- Page Content -->
+	<div class="container mt-5 bg-white rounded pt-3">
+
+		<div class="card mb-3 ">
+			<div class="row no-gutters ">
+				<div class="col-md-4"></div>
+				<div class="col-md-8">
+					<div class="card-body">
+						<h2>Registro</h2>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<form th:action="@{/usuario/save}" method="post">
+			<div class="form-group">
+				<label for="nombres">Nombre:</label> <input type="text" class="form-control" id="nombre" name="nombre"
+					required placeholder="Ingrese su nombre" autocomplete="off">
+			</div>
+
+			<div class="form-group">
+				<label for="email">Email:</label> <input type="email" class="form-control" id="email" name="email"
+					required placeholder="Ingrese su email" autocomplete="off">
+			</div>
+
+			<div class="form-group">
+				<label for="direccion">Dirección:</label> <input type="text" class="form-control" id="direccion"
+					name="direccion" required placeholder="Ingrese su dirección" autocomplete="off">
+			</div>
+			<div class="form-group">
+				<label for="direccion">Teléfono:</label> <input type="text" class="form-control" id="telefono"
+					name="telefono" required placeholder="Ingrese su telefono" autocomplete="off">
+			</div>
+
+			<div class="form-group">
+				<label for="pwd">Contraseña</label> <input type="password" class="form-control" id="password"
+					name="password" required placeholder="Ingrese su contraseña" autocomplete="off">
+			</div>
+			<div class="col-sm-2 mb-3">
+				<button type="submit" class="btn btn-success mb-3">Guardar</button>
+			</div>
+		</form>
+
+	</div>
+
+	<!-- /.container -->
+
+	<!-- Footer -->
+	<footer class="py-5 bg-dark  ">
+		<div class="container">
+			<p class="m-0 text-center text-white">Copyright &copy; Spring Granatec 2022 <a rel="license"
+					href="http://creativecommons.org/licenses/by/4.0/"><img alt="Licencia Creative Commons"
+						style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
+				</a><br />Esta obra está bajo una <a rel="license"
+					href="http://creativecommons.org/licenses/by/4.0/">Licencia Creative Commons Atribución 4.0
+					Internacional</a>.</p>
+
+		</div>
+		<!-- /.container -->
+	</footer>
 
 	<!-- Bootstrap core JavaScript -->
 	<script th:src="@{/vendor/jquery/jquery.min.js}"></script>
