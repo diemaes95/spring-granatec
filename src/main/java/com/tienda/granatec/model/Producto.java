@@ -79,7 +79,7 @@ public class Producto {
 		this.precio = precio;
 	}
 
-	public double getCantidad() {
+	public int getCantidad() {
 		return cantidad;
 	}
 

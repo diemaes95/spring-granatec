@@ -41,7 +41,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 			//para que pueda ser un objeto Userdetails se retorna con build()
 			return User.builder()
 					.username(usuario.getNombre())
-					.password(bCrypt.encode(usuario.getPassword()))
+					.password(usuario.getPassword())  //para encriptar contraseña  añadir (bCrypt.encode(usuario.getPassword()), en lugar de usuario.getPassword()
 					.roles(usuario.getTipo())
 					.build();
 		}else {

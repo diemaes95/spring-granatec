@@ -88,7 +88,7 @@ public class ProductoController {
 		
 		
 		if (file.isEmpty()) {// cuando se modifica un producto y se carga la misma imagen
-		
+			
 			producto.setImagen(p.getImagen());
 		} else {// cuando se modifica un producto y su imagen también
 			 p = new Producto();
