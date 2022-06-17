@@ -78,7 +78,7 @@ public class UsuarioController {
 		}
 		return "redirect:/";
 	}
-	
+	//metodo para visualizar las compras que realiza un user
 	@GetMapping("/compras")
 	public String obtenerCompras(Model model, HttpSession sesion) {
 		model.addAttribute("sesion", sesion.getAttribute("idUsuario"));
@@ -89,7 +89,7 @@ public class UsuarioController {
 		model.addAttribute("ordenes", ordenes);
 		return "usuario/compras";
 	}
-	
+	//metodo que redirige a Detalle de la compra del cliente
 	@GetMapping("/detalle/{id}")
 	public String detalleCompra(@PathVariable Integer id, HttpSession sesion, Model model) {
 		logger.info("id del pedido {} ", id);

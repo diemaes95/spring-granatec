@@ -27,6 +27,7 @@ import com.tienda.granatec.service.IDetalleOrdenService;
 import com.tienda.granatec.service.IOrdenService;
 import com.tienda.granatec.service.IProductoService;
 import com.tienda.granatec.service.IUsuarioService;
+import com.tienda.granatec.service.UsuarioServiceImpl;
 
 /*Esta clase tendra la logica para mostrar los productos al usuario*/
 @Controller
@@ -53,17 +54,20 @@ public class HomeController {
 	// datos de la pedido/orden
 	Orden orden = new Orden();
 
+	// Método para redirigir a la home del usuario
 	@GetMapping("")
 	public String home(Model model, HttpSession sesion) {
 		model.addAttribute("productos", productoService.findAll());// aqui trae todos los productos con findAll()
 		LOGGER.info("sesion del usuario: {}", sesion.getAttribute("idUsuario"));
-		//sesion 
+		// sesion
 		model.addAttribute("sesion", sesion.getAttribute("idUsuario"));
 		return "usuario/home";
 	}
 
+	// Método para redirigir a la vista de producto para añadir al carrito
 	@GetMapping("productoHome/{id}")
-	public String productoHome(@PathVariable Integer id, Model model) {
+	public String productoHome(@PathVariable Integer id, Model model,HttpSession sesion ) {
+		model.addAttribute("sesion", sesion.getAttribute("idUsuario"));
 		LOGGER.info("id producto enviado como parametro {}", id);
 		Producto producto = new Producto();
 		Optional<Producto> productoOptional = productoService.get(id); // Nos devuelve el producto segun su id
@@ -72,14 +76,14 @@ public class HomeController {
 		return "usuario/productoHome";
 	}
 
+	// Método que nos redirige al carrito y añade la compra
 	@PostMapping("/cart")
-	public String addCart(@RequestParam Integer id, @RequestParam Integer cantidad, Model model) {
+	public String addCart(@RequestParam Integer id, @RequestParam Integer cantidad, Model model,HttpSession sesion ) {
+		model.addAttribute("sesion", sesion.getAttribute("idUsuario"));
 		DetalleOrden detalleOrden = new DetalleOrden();
 		Producto producto = new Producto();
-		double sumaTotal = 0; // inicializamos a cero para que no se quede con el ultimo valor despues de una
-								// ejecucion
+		double sumaTotal = 0;
 		Optional<Producto> optionalProducto = productoService.get(id);
-		// se comprueba mediante logs que se recibe el producto y su dicha cantidad
 		LOGGER.info("Producto añadido: {}", optionalProducto.get());
 		LOGGER.info("Cantidad: {}", cantidad);
 		producto = optionalProducto.get();
@@ -105,9 +109,10 @@ public class HomeController {
 		return "usuario/carrito";
 	}
 
-	// quitar un producto del carrito
+	// Método para quitar un producto del carrito.
 	@GetMapping("/delete/cart/{id}")
-	public String deleteProductoCart(@PathVariable Integer id, Model model) {
+	public String deleteProductoCart(@PathVariable Integer id, Model model, HttpSession sesion ) {
+		model.addAttribute("sesion", sesion.getAttribute("idUsuario"));
 		// lista nueva de productos
 		List<DetalleOrden> ordenesNueva = new ArrayList<DetalleOrden>();
 
@@ -143,8 +148,9 @@ public class HomeController {
 		return "/usuario/carrito";
 	}
 
+	// Método para ver el resumen del pedido
 	@GetMapping("/order")
-	public String order(Model model,HttpSession sesion) {
+	public String order(Model model, HttpSession sesion) {
 		// Obtenemos el usuario mediante la sesion
 		Usuario usuario = usuarioService.findById(Integer.parseInt(sesion.getAttribute("idUsuario").toString())).get();
 
@@ -154,7 +160,7 @@ public class HomeController {
 		return "usuario/resumenorden";
 	}
 
-	// Método para guardar el pedido
+	// Método para guardar/generar el pedido
 	@GetMapping("/saveOrder")
 	public String saveOrder(HttpSession sesion) {
 		Date fechaCreacion = new Date();
@@ -166,10 +172,8 @@ public class HomeController {
 		Usuario usuario = usuarioService.findById(Integer.parseInt(sesion.getAttribute("idUsuario").toString())).get();
 		orden.setUsuario(usuario);
 		// guardar datos del pedido / orden
-		
-			ordenService.save(orden);
-		
-		
+
+		ordenService.save(orden);
 
 		// guardar detalles del pedido
 
@@ -187,14 +191,70 @@ public class HomeController {
 		return "redirect:/";
 	}
 
+	// Método para buscar productos.
 	@PostMapping("/buscar")
-	public String searchProducto(@RequestParam String nombre, Model model) {
+	public String searchProducto(@RequestParam String nombre, Model model, HttpSession sesion) {
+		model.addAttribute("sesion", sesion.getAttribute("idUsuario"));
 		LOGGER.info("Nombre del producto {}", nombre);
-		//Devuelve una lista con los productos que contengan los caracteres buscados
+		// Devuelve una lista con los productos que contengan los caracteres buscados
 		List<Producto> productos = productoService.findAll().stream()
 				.filter(x -> x.getNombre().toUpperCase().contains(nombre.toUpperCase())).collect(Collectors.toList());
 		model.addAttribute("productos", productos);
 		return "usuario/home";
 	}
 
+	// Método para visualizar neveras.
+	@GetMapping("/buscarNevera")
+	public String searchNevera(Model model, HttpSession sesion) {
+		model.addAttribute("sesion", sesion.getAttribute("idUsuario"));
+		String nombre = "Frigorifico";
+		LOGGER.info("Nombre del producto {}", nombre);
+		// Devuelve una lista con los productos que contengan los caracteres buscados
+		List<Producto> productos = productoService.findAll().stream()
+				.filter(x -> x.getNombre().toUpperCase().contains(nombre.toUpperCase())).collect(Collectors.toList());
+		model.addAttribute("productos", productos);
+		return "usuario/home";
+	}
+
+	// Método para visualizar secadoras.
+	@GetMapping("/buscarSecadora")
+	public String searchSecadora(Model model, HttpSession sesion) {
+		model.addAttribute("sesion", sesion.getAttribute("idUsuario"));
+		String nombre = "Secadora";
+		LOGGER.info("Nombre del producto {}", nombre);
+		// Devuelve una lista con los productos que contengan los caracteres buscados
+		List<Producto> productos = productoService.findAll().stream()
+				.filter(x -> x.getNombre().toUpperCase().contains(nombre.toUpperCase())).collect(Collectors.toList());
+		model.addAttribute("productos", productos);
+		return "usuario/home";
+	}
+
+	// Método para visualizar lavadoras.
+	@GetMapping("/buscarLavadora")
+	public String searchLavadora(Model model, HttpSession sesion) {
+		model.addAttribute("sesion", sesion.getAttribute("idUsuario"));
+		String nombre = "Lavadora";
+		LOGGER.info("Nombre del producto {}", nombre);
+		// Devuelve una lista con los productos que contengan los caracteres buscados
+		List<Producto> productos = productoService.findAll().stream()
+				.filter(x -> x.getNombre().toUpperCase().contains(nombre.toUpperCase())).collect(Collectors.toList());
+		model.addAttribute("productos", productos);
+		return "usuario/home";
+	}
+
+	// Método para visualizar Altavoces.
+	@GetMapping("/buscarAltavoz")
+	public String searchAltavoz(Model model, HttpSession sesion) {
+		model.addAttribute("sesion", sesion.getAttribute("idUsuario"));
+		String nombre = "Altavoz";
+		LOGGER.info("Nombre del producto {}", nombre);
+		// Devuelve una lista con los productos que contengan los caracteres buscados
+		List<Producto> productos = productoService.findAll().stream()
+				.filter(x -> x.getNombre().toUpperCase().contains(nombre.toUpperCase())).collect(Collectors.toList());
+		model.addAttribute("productos", productos);
+		
+			return "usuario/home";
+		
+		
+	}
 }

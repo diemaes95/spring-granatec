@@ -37,24 +37,25 @@ public class ProductoController {
 	
 	@Autowired
 	private IUsuarioService usuarioService;
-
+	//metodo que redirige al administrador al registro de productos con su CRUD
 	@GetMapping("")
 	public String show(Model model) {
 		model.addAttribute("productos", productoService.findAll());// lleva datos desde el backend a frontend
 		return "productos/show";
 	}
-
+	//metodo que redirige desde la vista show a la vista de crear un producto 
 	@GetMapping("/create")
 	public String create() {
 		return "productos/create";
 	}
-
+	//Método para guardar un registro de producto 
 	@PostMapping("/save")
-	public String save(Producto producto, @RequestParam("img") MultipartFile file ,HttpSession sesion) throws IOException {// requestParam
-																										// trae del
-																										// campo img del
-																										// formulario la
-		// imagen para la variable vile
+	public String save(Producto producto, @RequestParam("img") MultipartFile file ,HttpSession sesion)
+			throws IOException {// requestParam
+								// trae del
+									// campo img del
+									// formulario la
+		
 		LOGGER.info("Este es el objeto producto {}", producto);
 		
 		Usuario usuario = usuarioService.findById(Integer.parseInt(sesion.getAttribute("idUsuario").toString())).get();
@@ -70,7 +71,7 @@ public class ProductoController {
 		productoService.save(producto);
 		return "redirect:/productos";
 	}
-
+	//Método para redirigir un producto a la ruta edit.html
 	@GetMapping("/edit/{id}")
 	public String edit(@PathVariable Integer id, Model model) {
 		Producto producto = new Producto();
@@ -80,7 +81,7 @@ public class ProductoController {
 		model.addAttribute("producto", producto); // lleva datos desde el backend a frontend
 		return "productos/edit";
 	}
-
+	//Método que hace el volcado de datos en un formulario para su posterior edicion y guardado.
 	@PostMapping("/update")
 	public String update(Producto producto , @RequestParam("img") MultipartFile file) throws IOException {
 		Producto p = new Producto();
@@ -105,7 +106,7 @@ public class ProductoController {
 		productoService.update(producto);
 		return "redirect:/productos";
 	}
-
+	//metodo para borrar producto 
 	@GetMapping("/delete/{id}")
 	public String delete(@PathVariable Integer id) {
 		

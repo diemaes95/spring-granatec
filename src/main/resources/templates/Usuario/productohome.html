@@ -71,7 +71,7 @@
 							</ul>
 
 
-							<button type="submit" class="btn btn-dark">Añadir al carrito </button>
+							<button type="submit" class="btn btn-dark"  th:unless="${sesion==null}">Añadir al carrito </button>
 
 						</form>
 					</div>
