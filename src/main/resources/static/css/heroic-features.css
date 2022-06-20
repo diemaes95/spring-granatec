@@ -16,5 +16,14 @@ footer{
 }
 
 .jumbotron{
+	
 	background-color: #3f6682;
+}
+
+.navbar{
+	background-color: #3f6682;
+}
+/*Estilo para la imagen del card*/
+.card-img-top{
+width: 100%;	
 }

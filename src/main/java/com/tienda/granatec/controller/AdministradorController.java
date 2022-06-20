@@ -54,7 +54,7 @@ public class AdministradorController {
 		return "administrador/usuarios";
 	}
 	
-	//Método que redirige a la vista de pedidos 
+	//Método que redirige a la vista de pedidos y devuelve los pedidos
 	@GetMapping("/pedidos")
 	public String pedidos(Model model) {
 		model.addAttribute("pedidos", ordenService.findAll());
